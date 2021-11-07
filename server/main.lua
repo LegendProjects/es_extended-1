@@ -253,7 +253,10 @@ local Logout = function(playerId)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
 	if xPlayer then
 		TriggerEvent('esx:playerDropped', playerId, reason)
-		TriggerEvent('npwd:unloadPlayer', playerId)
+
+		if Config.NPWD then
+			TriggerEvent('npwd:unloadPlayer', playerId)
+		end
 
 		ExecuteCommand(('remove_principal player.%s group.%s'):format(xPlayer.source, xPlayer.group))
 		ExecuteCommand(('remove_principal player.%s group.%s'):format(xPlayer.source, xPlayer.job.name))
