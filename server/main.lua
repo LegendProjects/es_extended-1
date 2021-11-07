@@ -181,7 +181,7 @@ function loadESXPlayer(identifier, playerId, isNew)
 		end
 
 		-- Identity
-		if result.firstname and result.firstname ~= '' then
+		if result.firstname and result.firstname ~= '' and result.lastname and result.lastname ~= '' then
 			userData.firstname = result.firstname
 			userData.lastname = result.lastname
 			userData.playerName = userData.firstname..' '..userData.lastname
@@ -195,7 +195,7 @@ function loadESXPlayer(identifier, playerId, isNew)
 		-- Statebags
 		Player.firstName = userData.firstname
 		Player.lastName = userData.lastname
-		Player.name = ('%s %s'):format(userData.firstname, userData.playerName)
+		Player.name = userData.playerName or 'Noname Noname'
 		Player.job = jobObject.label
 		Player.grade = gradeObject.label
 
