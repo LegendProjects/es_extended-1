@@ -560,6 +560,10 @@ ESX.Game.GetVehicleProperties = function(vehicle)
 			dirtLevel         = ESX.Math.Round(GetVehicleDirtLevel(vehicle), 1),
 			color1            = colorPrimary,
 			color2            = colorSecondary,
+			color1Custom      = table.pack(GetVehicleCustomPrimaryColour(vehicle)),
+			color2Custom      = table.pack(GetVehicleCustomSecondaryColour(vehicle)),
+			color1Type        = GetVehicleModColor_1(vehicle),
+			color2Type        = GetVehicleModColor_2(vehicle),
 
 			pearlescentColor  = pearlescentColor,
 			wheelColor        = wheelColor,
@@ -651,6 +655,10 @@ ESX.Game.SetVehicleProperties = function(vehicle, props)
 		if props.dirtLevel then SetVehicleDirtLevel(vehicle, props.dirtLevel + 0.0) end
 		if props.color1 then SetVehicleColours(vehicle, props.color1, colorSecondary) end
 		if props.color2 then SetVehicleColours(vehicle, props.color1 or colorPrimary, props.color2) end
+		if props.color1Custom then SetVehicleCustomPrimaryColour(vehicle, props.color1Custom[1], props.color1Custom[2], props.color1Custom[3]) end
+		if props.color2Custom then SetVehicleCustomSecondaryColour(vehicle, props.color2Custom[1], props.color2Custom[2], props.color2Custom[3]) end
+		if props.color1Type then SetVehicleModColor_1(vehicle, props.color1Type) end
+		if props.color2Type then SetVehicleModColor_2(vehicle, props.color2Type) end
 		if props.pearlescentColor then SetVehicleExtraColours(vehicle, props.pearlescentColor, wheelColor) end
 		if props.wheelColor then SetVehicleExtraColours(vehicle, props.pearlescentColor or pearlescentColor, props.wheelColor) end
 		if props.wheels then SetVehicleWheelType(vehicle, props.wheels) end
@@ -665,11 +673,7 @@ ESX.Game.SetVehicleProperties = function(vehicle, props)
 
 		if props.extras then
 			for extraId,enabled in pairs(props.extras) do
-				if enabled then
-					SetVehicleExtra(vehicle, tonumber(extraId), 0)
-				else
-					SetVehicleExtra(vehicle, tonumber(extraId), 1)
-				end
+				SetVehicleExtra(vehicle, tonumber(extraId), enabled and 0 or 1)
 			end
 		end
 
