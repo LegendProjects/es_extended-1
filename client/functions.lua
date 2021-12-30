@@ -2,9 +2,9 @@ ESX                           = {}
 Core                          = {}
 ESX.PlayerData                = {}
 ESX.PlayerLoaded              = false
-Core.CurrentRequestId          = 0
+Core.CurrentRequestId         = 0
 Core.ServerCallbacks          = {}
-Core.TimeoutCallbacks          = {}
+Core.TimeoutCallbacks         = {}
 
 ESX.UI                        = {}
 ESX.UI.HUD                    = {}
@@ -484,7 +484,6 @@ ESX.Game.IsSpawnPointClear = function(coords, maxDistance)
 	return #ESX.Game.GetVehiclesInArea(coords, maxDistance) == 0
 end
 
-
 ESX.Game.GetClosestEntity = function(entities, isPlayerEntities, coords, modelFilter)
 	local closestEntity, closestEntityDistance, filteredEntities = -1, -1, nil
 
@@ -750,7 +749,7 @@ end
 
 ESX.Game.Utils.DrawText3D = function(coords, text, size, font)
 	local camCoords = GetGameplayCamCoords()
-	local distance = #(vector - camCoords)
+	local distance = #(coords - camCoords)
 
 	if not size then size = 1 end
 	if not font then font = 0 end
